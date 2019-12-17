@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Tiles {
     public static int TILE_WIDTH = 32;
 
@@ -29,6 +30,7 @@ public class Tiles {
         tileMap.put("floor", new Tile(2, 0));
         tileMap.put("player", new Tile(27, 0));
         tileMap.put("skeleton", new Tile(29, 6));
+        tileMap.put("sword", new Tile(1, 29));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
