@@ -25,6 +25,9 @@ public class MapLoader {
                         case ' ':
                             cell.setType(CellType.EMPTY);
                             break;
+                        case 'S':
+                            cell.setType(CellType.FLOOR);
+                            break;
                         case '#':
                             cell.setType(CellType.WALL);
                             break;
