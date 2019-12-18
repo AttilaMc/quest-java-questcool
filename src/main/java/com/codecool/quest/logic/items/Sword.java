@@ -2,6 +2,7 @@ package com.codecool.quest.logic.items;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.actors.Actor;
 
 
 public class Sword extends Items {
@@ -11,13 +12,13 @@ public class Sword extends Items {
         super(cell);
     }
 
-    public void setDamageBonus(){
 
-    }
 
     public int getDamageBonus(){
         return this.damage;
     }
+
+
 
     @Override
     public String getTileName() {

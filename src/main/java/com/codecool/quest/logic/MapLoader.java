@@ -42,7 +42,6 @@ public class MapLoader {
                         case 'S':
                             cell.setType(CellType.SWORD);
                             new Sword(cell);
-
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
