@@ -93,7 +93,6 @@ public class Main extends Application {
                             Cell cell = map.getCell(x, y);
                             if (cell.getTileName().equals("sword") && cell.getActor() != null) {
                                 cell.getActor().increasePlayerDamageBySword();
-                                System.out.println("big");
                                 cell.setType(CellType.FLOOR);
                             }
                         }
