@@ -2,6 +2,8 @@ package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.items.Sword;
+
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -26,6 +28,7 @@ public class MapLoader {
                         case ' ':
                             cell.setType(CellType.EMPTY);
                             break;
+
                         case '#':
                             cell.setType(CellType.WALL);
                             break;
@@ -35,6 +38,11 @@ public class MapLoader {
                         case 's':
                             cell.setType(CellType.FLOOR);
                             new Skeleton(cell);
+                            break;
+                        case 'S':
+                            cell.setType(CellType.SWORD);
+                            new Sword(cell);
+
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);

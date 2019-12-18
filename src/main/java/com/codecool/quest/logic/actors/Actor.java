@@ -4,9 +4,12 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Drawable;
 
+import java.util.ArrayList;
+
 public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
+    private ArrayList<Integer> stats = new ArrayList<Integer>();
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -15,7 +18,7 @@ public abstract class Actor implements Drawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        int validMove = preventWall(nextCell);
+        int validMove = preventOccupiedCell(nextCell);
             if (validMove == 1){
                 cell.setActor(null);
                 nextCell.setActor(this);
@@ -23,9 +26,10 @@ public abstract class Actor implements Drawable {
             }
 
     }
-    public int preventWall(Cell cell){
+    public int preventOccupiedCell(Cell cell){
         String cellType = cell.getType().toString();
-        if (cellType.equals("WALL")){
+        //if the cell.actor isnt null skeletons might wont attack, check later.
+        if (cellType.equals("WALL") | cell.getActor() != null){
             return 0;
         }
         else{
