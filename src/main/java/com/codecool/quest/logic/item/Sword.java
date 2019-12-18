@@ -1,23 +1,22 @@
-package com.codecool.quest.logic.items;
+package com.codecool.quest.logic.item;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.Drawable;
 
 
-public class Sword extends Items {
+public class Sword extends Item {
     private int damage = 2;
 
     public Sword(Cell cell){
         super(cell);
     }
 
-    public void setDamageBonus(){
 
-    }
 
     public int getDamageBonus(){
         return this.damage;
     }
+
+
 
     @Override
     public String getTileName() {

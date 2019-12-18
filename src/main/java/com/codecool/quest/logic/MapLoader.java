@@ -2,7 +2,7 @@ package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.items.Sword;
+import com.codecool.quest.logic.item.Sword;
 
 
 import java.io.InputStream;
@@ -42,7 +42,6 @@ public class MapLoader {
                         case 'S':
                             cell.setType(CellType.SWORD);
                             new Sword(cell);
-
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
