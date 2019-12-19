@@ -6,6 +6,7 @@ import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
 
+import com.codecool.quest.logic.item.Item;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +23,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.LinkedList;
+
 public class Main extends Application {
     private GameMap map = MapLoader.loadMap();
     private Canvas canvas = new Canvas(
@@ -31,11 +34,11 @@ public class Main extends Application {
     private Label healthLabel = new Label();
     private Label DamageLabel = new Label();
     private Label keyCount = new Label();
+    private Label inventory = new Label();
     private Button buttonPickup = new Button("Pick-up");
 
 
-
-    public static void main(String[] args) {
+    public static void main(String[]args) {
         launch(args);
 
     }
@@ -46,18 +49,17 @@ public class Main extends Application {
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
 
-
-
-
         ui.add(new Label("Health: "), 0, 0);
-        ui.add(new Label("Damage: "), 0 , 1);
+        ui.add(new Label("Damage: "), 0, 1);
         ui.add(new Label("Key Count"), 0, 2);
+        ui.add(new Label("Inventory"), 0, 3);
 
         ui.add(healthLabel, 1, 0);
-        ui.add(DamageLabel, 1,1);
+        ui.add(DamageLabel, 1, 1);
         ui.add(keyCount, 2, 2);
+        ui.add(inventory, 2, 3);
 
-        ui.add(buttonPickup, 3, 3);
+        ui.add(buttonPickup, 3, 4);
 
         BorderPane borderPane = new BorderPane();
 
@@ -78,7 +80,7 @@ public class Main extends Application {
                             if (cell.getTileName().equals("sword") && cell.getActor() != null) {
                                 cell.getActor().increasePlayerDamageBySword();
                                 cell.setType(CellType.FLOOR);
-                            } else if(cell.getTileName().equals("key") && cell.getActor() != null){
+                            } else if (cell.getTileName().equals("key") && cell.getActor() != null) {
                                 cell.getActor().increaseKeyCount();
                                 cell.setType(CellType.FLOOR);
                                 refresh();
@@ -108,7 +110,7 @@ public class Main extends Application {
                 refresh();
                 break;
             case D:
-                map.getPlayer().move(1,0);
+                map.getPlayer().move(1, 0);
                 refresh();
                 break;
 
@@ -128,12 +130,12 @@ public class Main extends Application {
                 }
             }
         }
+
         healthLabel.setText(" " + map.getPlayer().getHealth());
         DamageLabel.setText(" " + map.getPlayer().getDamage());
         keyCount.setText(" " + map.getPlayer().getKeyCount());
+
     }
-
-
 
 
 }
