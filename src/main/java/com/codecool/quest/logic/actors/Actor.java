@@ -15,6 +15,8 @@ public abstract class Actor implements Drawable {
     public int damage = 1;
     public int keyCount;
 
+
+
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
@@ -111,6 +113,10 @@ public abstract class Actor implements Drawable {
 
     public void increaseKeyCount(){
         this.keyCount++;
+    }
+
+    public void increaseHealth(){
+        this.health += 5;
     }
 }
 

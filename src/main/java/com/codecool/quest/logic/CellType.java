@@ -7,7 +7,8 @@ public enum CellType {
     SWORD("sword"),
     KEY("key"),
     OPENDOOR("opendoor"),
-    CLOSEDDOOR("closeddoor");
+    CLOSEDDOOR("closeddoor"),
+    HEALTH("health");
 
 
 
