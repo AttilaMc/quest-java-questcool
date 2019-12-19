@@ -38,7 +38,7 @@ public class Main extends Application {
     private Button buttonPickup = new Button("Pick-up");
 
 
-    public static void main(String[]args) {
+    public static void main(String[] args) {
         launch(args);
 
     }
@@ -58,7 +58,6 @@ public class Main extends Application {
         ui.add(DamageLabel, 1, 1);
         ui.add(keyCount, 2, 2);
         ui.add(inventory, 2, 3);
-
         ui.add(buttonPickup, 3, 4);
 
         BorderPane borderPane = new BorderPane();
@@ -70,6 +69,7 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
         refresh();
+
         scene.setOnKeyPressed(this::onKeyPressed);
 
         buttonPickup.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -84,7 +84,7 @@ public class Main extends Application {
                                 cell.getActor().increaseKeyCount();
                                 cell.setType(CellType.FLOOR);
                                 refresh();
-                            } else if (cell.getTileName().equals("health") && cell.getActor() != null){
+                            } else if (cell.getTileName().equals("health") && cell.getActor() != null) {
                                 cell.getActor().increaseHealth();
                                 cell.setType(CellType.FLOOR);
                                 refresh();
@@ -117,13 +117,8 @@ public class Main extends Application {
                 map.getPlayer().move(1, 0);
                 refresh();
                 break;
-
         }
     }
-
-
-
-
 
 
     private void refresh() {
@@ -139,13 +134,8 @@ public class Main extends Application {
                 }
             }
         }
-
         healthLabel.setText(" " + map.getPlayer().getHealth());
         DamageLabel.setText(" " + map.getPlayer().getDamage());
         keyCount.setText(" " + map.getPlayer().getKeyCount());
-
     }
-
-
-
 }

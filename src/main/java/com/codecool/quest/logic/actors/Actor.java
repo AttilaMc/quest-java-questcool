@@ -1,9 +1,12 @@
 package com.codecool.quest.logic.actors;
 
+import java.util.concurrent.TimeUnit;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.item.Item;
+
+import java.util.Random;
 
 import java.util.LinkedList;
 
@@ -20,6 +23,33 @@ public abstract class Actor implements Drawable {
         this.cell = cell;
         this.cell.setActor(this);
     }
+    public int[] generateRandomVector() {
+        Random randX = new Random();
+        Random randY = new Random();
+        int[] moveVector = new int[2];
+        int bigRandX = randX.nextInt(1000);
+        int bigRandY = randY.nextInt(1000);
+        if (bigRandX < 333) {
+            moveVector[0] = -1;
+        } else if (bigRandX >= 333 && bigRandX < 666) {
+            moveVector[0] = 0;
+        } else if (bigRandX > 666) {
+            moveVector[0] = 1;
+        }
+
+        if (bigRandY < 333) {
+            moveVector[1] = -1;
+        } else if (bigRandY >= 333 && bigRandY < 666) {
+            moveVector[1] = 0;
+        } else if (bigRandY > 666) {
+            moveVector[1] = 1;
+        }
+        return moveVector;
+    }
+
+
+
+
 
 
     public void move(int dx, int dy) {
