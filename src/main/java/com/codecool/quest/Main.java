@@ -121,6 +121,11 @@ public class Main extends Application {
         }
     }
 
+
+
+
+
+
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -140,6 +145,7 @@ public class Main extends Application {
         keyCount.setText(" " + map.getPlayer().getKeyCount());
 
     }
+
 
 
 }
