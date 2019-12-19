@@ -58,6 +58,9 @@ public abstract class Actor implements Drawable {
         String cellType = cell.getType().toString();
 
         if (cellType.equals("SWORD")) {
+
+            addToInventory(cell.getItem());
+            System.out.println("inventory size: " + inventory.size());
             return 1;
         } else {
             return 0;
