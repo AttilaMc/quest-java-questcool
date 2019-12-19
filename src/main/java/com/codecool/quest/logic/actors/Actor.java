@@ -61,24 +61,17 @@ public abstract class Actor implements Drawable {
     }
 
     public void fight(Cell cell, Cell nextCell) {
-        //get the damage of the actor in actual cell, attacker makes dmg first
+        actorAttack(cell, nextCell);
+        actorAttack(nextCell, cell);
+    }
+
+    public void actorAttack(Cell cell, Cell nextCell) {
         int actorInActualCellDamage = cell.getActor().getDamage();
-        //remove the dmg from the health of the enemy in next cell
         nextCell.getActor().setHealth(-1 * actorInActualCellDamage);
-        //check if dead
         if (nextCell.getActor().health <= 0) {
             nextCell.setActor(null);
             nextCell.setType(CellType.FLOOR);
 
-        }
-        //get the damage of the actor in next cell
-        int actorInNextCellDamage = nextCell.getActor().getDamage();
-        //remove the dmg from the health of the enemy in cell
-        cell.getActor().setHealth(-1 * actorInNextCellDamage);
-        //check if dead
-        if (cell.getActor().health <= 0) {
-            cell.setActor(null);
-            cell.setType(CellType.FLOOR);
         }
     }
 
