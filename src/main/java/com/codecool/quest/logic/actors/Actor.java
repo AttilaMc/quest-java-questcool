@@ -40,8 +40,8 @@ public abstract class Actor implements Drawable {
         String cellType = cell.getType().toString();
         //if the cell.actor isnt null skeletons might wont attack, check later.
         if (cellType.equals("WALL") || cell.getActor() != null || cellType.equals("CLOSEDDOOR")) {
-            System.out.println(this.keyCount);
             if(cellType.equals("CLOSEDDOOR") && this.keyCount >= 1){
+                cell.setType(CellType.OPENDOOR);
                 return 1;
             } else {
                 return 0;
