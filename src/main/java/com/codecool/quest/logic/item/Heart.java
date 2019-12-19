@@ -2,9 +2,9 @@ package com.codecool.quest.logic.item;
 
 import com.codecool.quest.logic.Cell;
 
-public class Health extends Item {
+public class Heart extends Item {
 
-    public Health(Cell cell){
+    public Heart(Cell cell){
         super(cell);
     }
 

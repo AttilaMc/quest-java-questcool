@@ -40,7 +40,7 @@ public abstract class Actor implements Drawable {
     public int preventOccupiedCell(Cell cell) {
 
         String cellType = cell.getType().toString();
-        if (cellType.equals("WALL") || cell.getActor() != null || cellType.equals("CLOSEDDOOR")) {
+        if (cellType.equals("WALL") || cell.getActor() != null || cellType.equals("CLOSEDDOOR") || cellType.equals("police")) {
             if (cellType.equals("CLOSEDDOOR") && this.keyCount >= 1) {
                 cell.setType(CellType.OPENDOOR);
                 return 1;
@@ -68,6 +68,8 @@ public abstract class Actor implements Drawable {
         //check if dead
         if (nextCell.getActor().health <= 0) {
             nextCell.setActor(null);
+            nextCell.setType(CellType.FLOOR);
+
         }
         //get the damage of the actor in next cell
         int actorInNextCellDamage = nextCell.getActor().getDamage();
@@ -76,6 +78,7 @@ public abstract class Actor implements Drawable {
         //check if dead
         if (cell.getActor().health <= 0) {
             cell.setActor(null);
+            cell.setType(CellType.FLOOR);
         }
     }
 
