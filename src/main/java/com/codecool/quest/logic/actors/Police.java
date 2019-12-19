@@ -1,20 +1,19 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.actors.Actor;
 
-public class Skeleton extends Actor {
+public class Police extends Actor {
 
-
-    public Skeleton(Cell cell) {
+    public Police(Cell cell){
         super(cell);
     }
 
-
     @Override
     public String getTileName() {
-        return "skeleton";
+        return "police";
     }
 
+    public void moveRandomly(){
 
+    }
 }
