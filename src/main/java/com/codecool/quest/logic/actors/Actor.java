@@ -1,6 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.item.Item;
 
@@ -12,6 +13,7 @@ public abstract class Actor implements Drawable {
     private int health = 10;
     private LinkedList<Item> inventory = new LinkedList<Item>();
     public int damage = 1;
+    public int keyCount;
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -37,12 +39,20 @@ public abstract class Actor implements Drawable {
 
         String cellType = cell.getType().toString();
         //if the cell.actor isnt null skeletons might wont attack, check later.
-        if (cellType.equals("WALL") | cell.getActor() != null) {
-            return 0;
-        } else {
+        if (cellType.equals("WALL") || cell.getActor() != null || cellType.equals("CLOSEDDOOR")) {
+            System.out.println(this.keyCount);
+            if(cellType.equals("CLOSEDDOOR") && this.keyCount >= 1){
+                return 1;
+            } else {
+                return 0;
+            }
+        }  else {
             return 1;
         }
+
     }
+
+
 
     public int pickSwordUp(Cell cell) {
         String cellType = cell.getType().toString();
@@ -86,9 +96,17 @@ public abstract class Actor implements Drawable {
         return damage;
     }
 
+    public int getKeyCount(){
+        return keyCount;
+    }
+
     public void increasePlayerDamageBySword() {
         this.damage += 2;
 
+    }
+
+    public void increaseKeyCount(){
+        this.keyCount++;
     }
 }
 

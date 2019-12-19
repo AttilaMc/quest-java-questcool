@@ -30,6 +30,7 @@ public class Main extends Application {
     private GraphicsContext context = canvas.getGraphicsContext2D();
     private Label healthLabel = new Label();
     private Label DamageLabel = new Label();
+    private Label keyCount = new Label();
     private Button buttonPickup = new Button("Pick-up");
 
 
@@ -45,35 +46,18 @@ public class Main extends Application {
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
 
-        /*
-        buttonPickup.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-                for (int x = 0; x < map.getWidth(); x++) {
-                    for (int y = 0; y < map.getHeight(); y++) {
-                        Cell cell = map.getCell(x, y);
-                        if (cell.getActor() != null && cell.getType().equals("Sword")) {
-                            System.out.println("hey");
-                                cell.getActor().damage += 2;
-                        } else {
-                            System.out.println("yes");
-                        }
-                    }
-                }
-            }
-        });
-        */
 
 
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(new Label("Damage: "), 0 , 1);
+        ui.add(new Label("Key Count"), 0, 2);
 
         ui.add(healthLabel, 1, 0);
         ui.add(DamageLabel, 1,1);
+        ui.add(keyCount, 2, 2);
 
-        ui.add(buttonPickup, 2, 0);
+        ui.add(buttonPickup, 3, 3);
 
         BorderPane borderPane = new BorderPane();
 
@@ -93,8 +77,11 @@ public class Main extends Application {
                             Cell cell = map.getCell(x, y);
                             if (cell.getTileName().equals("sword") && cell.getActor() != null) {
                                 cell.getActor().increasePlayerDamageBySword();
-                                System.out.println("big");
                                 cell.setType(CellType.FLOOR);
+                            } else if(cell.getTileName().equals("key") && cell.getActor() != null){
+                                cell.getActor().increaseKeyCount();
+                                cell.setType(CellType.FLOOR);
+                                refresh();
                             }
                         }
                     }
@@ -143,6 +130,7 @@ public class Main extends Application {
         }
         healthLabel.setText(" " + map.getPlayer().getHealth());
         DamageLabel.setText(" " + map.getPlayer().getDamage());
+        keyCount.setText(" " + map.getPlayer().getKeyCount());
     }
 
 
