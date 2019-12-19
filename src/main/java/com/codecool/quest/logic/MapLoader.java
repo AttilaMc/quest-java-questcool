@@ -3,7 +3,7 @@ package com.codecool.quest.logic;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Police;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.item.Health;
+import com.codecool.quest.logic.item.Heart;
 import com.codecool.quest.logic.item.Sword;
 import com.codecool.quest.logic.item.Key;
 
@@ -63,7 +63,7 @@ public class MapLoader {
                             break;
                         case 'H':
                             cell.setType(CellType.HEALTH);
-                            new Health(cell);
+                            new Heart(cell);
                             break;
                         case 'P':
                             cell.setType(CellType.POLICE);
