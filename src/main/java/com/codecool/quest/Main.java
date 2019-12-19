@@ -70,6 +70,7 @@ public class Main extends Application {
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
+
         buttonPickup.addEventHandler(MouseEvent.MOUSE_ENTERED,
                 e -> {
                     for (int x = 0; x < map.getWidth(); x++) {
