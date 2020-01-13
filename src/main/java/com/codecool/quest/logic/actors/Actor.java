@@ -40,16 +40,20 @@ public abstract class Actor implements Drawable {
     public int preventOccupiedCell(Cell cell) {
 
         String cellType = cell.getType().toString();
-        if (cellType.equals("WALL") || cell.getActor() != null || cellType.equals("CLOSEDDOOR") || cellType.equals("police")) {
+        if (cellType.equals("WALL") || cell.getActor() != null || cellType.equals("CLOSEDDOOR") || cellType.equals("police") || cellType.equals("next")) {
             if (cellType.equals("CLOSEDDOOR") && this.keyCount >= 1) {
                 cell.setType(CellType.OPENDOOR);
                 return 1;
+            } else if(cellType.equals("next")){
+
             } else {
                 return 0;
             }
-        } else {
-            return 1;
         }
+
+            return 1;
+
+
 
     }
 

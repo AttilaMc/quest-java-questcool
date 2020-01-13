@@ -38,7 +38,7 @@ public class Main extends Application {
     private Button buttonPickup = new Button("Pick-up");
 
 
-    public static void main(String[]args) {
+    public static void main(String[] args) {
         launch(args);
 
     }
@@ -85,7 +85,7 @@ public class Main extends Application {
                                 cell.getActor().increaseKeyCount();
                                 cell.setType(CellType.FLOOR);
                                 refresh();
-                            } else if (cell.getTileName().equals("health") && cell.getActor() != null){
+                            } else if (cell.getTileName().equals("health") && cell.getActor() != null) {
                                 cell.getActor().increaseHealth();
                                 cell.setType(CellType.FLOOR);
                                 refresh();
@@ -123,10 +123,6 @@ public class Main extends Application {
     }
 
 
-
-
-
-
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -138,15 +134,15 @@ public class Main extends Application {
                 } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
+
             }
+
+            healthLabel.setText(" " + map.getPlayer().getHealth());
+            DamageLabel.setText(" " + map.getPlayer().getDamage());
+            keyCount.setText(" " + map.getPlayer().getKeyCount());
+
         }
 
-        healthLabel.setText(" " + map.getPlayer().getHealth());
-        DamageLabel.setText(" " + map.getPlayer().getDamage());
-        keyCount.setText(" " + map.getPlayer().getKeyCount());
 
     }
-
-
-
 }

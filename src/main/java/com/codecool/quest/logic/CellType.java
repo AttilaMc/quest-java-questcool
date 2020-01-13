@@ -9,7 +9,8 @@ public enum CellType {
     OPENDOOR("opendoor"),
     CLOSEDDOOR("closeddoor"),
     HEALTH("health"),
-    POLICE("police");
+    POLICE("police"),
+    NEXT("next");
 
 
 

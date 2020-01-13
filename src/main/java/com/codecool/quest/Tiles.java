@@ -37,6 +37,7 @@ public class Tiles {
         tileMap.put("closeddoor", new Tile(1, 10));
         tileMap.put("health", new Tile(23, 22));
         tileMap.put("police", new Tile(28, 4));
+        tileMap.put("next", new Tile(4,13));
 
 
     }
