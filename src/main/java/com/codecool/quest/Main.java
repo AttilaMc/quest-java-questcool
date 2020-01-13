@@ -4,12 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Actor;
-
-import com.codecool.quest.logic.item.Item;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -22,8 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.LinkedList;
 
 public class Main extends Application {
     private GameMap map = MapLoader.loadMap();
@@ -58,7 +51,6 @@ public class Main extends Application {
         ui.add(DamageLabel, 1, 1);
         ui.add(keyCount, 2, 2);
         ui.add(inventory, 2, 3);
-
         ui.add(buttonPickup, 3, 4);
 
         BorderPane borderPane = new BorderPane();
@@ -70,6 +62,8 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
         refresh();
+
+
         scene.setOnKeyPressed(this::onKeyPressed);
 
 
@@ -104,6 +98,7 @@ public class Main extends Application {
         switch (keyEvent.getCode()) {
             case W:
                 map.getPlayer().move(0, -1);
+
                 refresh();
                 break;
             case S:
@@ -118,7 +113,10 @@ public class Main extends Application {
                 map.getPlayer().move(1, 0);
                 refresh();
                 break;
-
+            case F:
+                map.getSkeletons();
+                System.out.println("INFO");
+                break;
         }
     }
 
@@ -146,3 +144,7 @@ public class Main extends Application {
 
     }
 }
+
+
+
+
