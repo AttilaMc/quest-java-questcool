@@ -1,5 +1,6 @@
 package com.codecool.quest;
 
+import com.codecool.quest.logic.MonsterMoveThread;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
@@ -92,13 +93,13 @@ public class Main extends Application {
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
+
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case W:
                 map.getPlayer().move(0, -1);
-
                 refresh();
                 break;
             case S:
@@ -114,8 +115,9 @@ public class Main extends Application {
                 refresh();
                 break;
             case F:
-                map.getSkeletons();
-                System.out.println("INFO");
+                MonsterMoveThread monsterMoveThread = new MonsterMoveThread();
+                System.out.println("fakutya");
+                monsterMoveThread.start();
                 break;
         }
     }
@@ -141,7 +143,9 @@ public class Main extends Application {
 
         }
 
-
+    }
+    public GameMap getGameMap(){
+        return map;
     }
 }
 

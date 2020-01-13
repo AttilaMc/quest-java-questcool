@@ -36,29 +36,7 @@ public class GameMap {
         return player;
     }
 
-    public void getSkeletons() {
-        ArrayList<Skeleton> Skeletons = new ArrayList<>();
 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                try {
-                    String tileName = cells[i][j].getActor().getTileName();
-                    if (tileName.equals("skeleton")) {
-                        int[] vector = cells[i][j].getActor().generateRandomVector();
-                        cells[i][j].getActor().move(vector[0], vector[1]);
-                    }
-                }
-                catch (NullPointerException e){
-
-                }
-
-
-                // System.out.println(Integer.toString(i));
-                //
-
-            }
-        }
-    }
 
 
     public int getWidth() {
