@@ -32,7 +32,6 @@ public class MapLoader {
                         case ' ':
                             cell.setType(CellType.EMPTY);
                             break;
-
                         case '#':
                             cell.setType(CellType.WALL);
                             break;
