@@ -1,10 +1,6 @@
 package com.codecool.quest;
 
-import com.codecool.quest.logic.MonsterMoveThread;
-import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
-import com.codecool.quest.logic.GameMap;
-import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,6 +15,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.*;
+
 public class Main extends Application {
     private GameMap map = MapLoader.loadMap();
     private Canvas canvas = new Canvas(
@@ -30,6 +31,7 @@ public class Main extends Application {
     private Label keyCount = new Label();
     private Label inventory = new Label();
     private Button buttonPickup = new Button("Pick-up");
+    Timer timer = new Timer();
 
 
     public static void main(String[] args) {
@@ -115,15 +117,20 @@ public class Main extends Application {
                 refresh();
                 break;
             case F:
-                MonsterMoveThread monsterMoveThread = new MonsterMoveThread();
-                System.out.println("fakutya");
+                MonsterMoveThread monsterMoveThread = new MonsterMoveThread(map, context, canvas);
                 monsterMoveThread.start();
+                System.out.println("Main method executed by main thread");
+                System.out.println("Number of active threads from the given thread: " + Thread.activeCount());
+                //timer.schedule(new IntervalCodeRun(map), 0, 1000);
+                refresh();
                 break;
+
+
         }
     }
 
 
-    private void refresh() {
+    public void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < map.getWidth(); x++) {
@@ -144,10 +151,30 @@ public class Main extends Application {
         }
 
     }
-    public GameMap getGameMap(){
-        return map;
+
+    public void SkeletonsMove(){
+
+        for (int i = 0; i < map.getWidth(); i++) {
+            for (int j = 0; j < map.getHeight(); j++) {
+                try {
+                    String tileName = map.cells[i][j].getActor().getTileName();
+                    if (tileName.equals("skeleton")) {
+                        int[] vector = map.cells[i][j].getActor().generateRandomVector();
+                        map.cells[i][j].getActor().move(vector[0], vector[1]);
+
+                    }
+                } catch (NullPointerException e) {
+
+                }
+
+            }
+
+        }
+        refresh();
     }
 }
+
+
 
 
 
