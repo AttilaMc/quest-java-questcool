@@ -21,10 +21,13 @@ import java.util.TimerTask;
 import java.util.*;
 
 public class Main extends Application {
-    private GameMap map = MapLoader.loadMap();
+    private GameMap map = MapLoader.loadMap("/map.txt");
+
     private Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
+
+
     private GraphicsContext context = canvas.getGraphicsContext2D();
     private Label healthLabel = new Label();
     private Label DamageLabel = new Label();
@@ -58,6 +61,8 @@ public class Main extends Application {
 
         BorderPane borderPane = new BorderPane();
 
+
+
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);
 
@@ -86,17 +91,45 @@ public class Main extends Application {
                                 cell.getActor().increaseHealth();
                                 cell.setType(CellType.FLOOR);
                                 refresh();
+                            } else if (cell.getTileName().equals("next") && cell.getActor() != null){
+                                map = MapLoader.loadMap("/map2.txt");
+                                context = canvas.getGraphicsContext2D();
+                                borderPane.setCenter(canvas);
+
+                                System.out.println("hsdf");
                             }
                         }
                     }
-                    refresh();
+
+
                 });
+
+        //Scene 2
+        /*
+        for(int x = 0; x < map.getWidth(); x++){
+            for (int y = 0; y < map.getHeight(); y++){
+                Cell cell = map.getCell(x, y);
+                if(cell.getTileName().equals("next") && cell.getActor() != null){
+                    //primaryStage.setScene(scene);
+                    //refresh(map2);
+                    System.out.println("heyasdf");
+                }
+            }
+        }
+        */
+
 
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
 
     }
+
+    public void setStage(String level) {
+        map = MapLoader.loadMap(level);
+        context = canvas.getGraphicsContext2D();
+    }
+
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -126,11 +159,13 @@ public class Main extends Application {
                 break;
 
 
+
         }
     }
 
 
     public void refresh() {
+
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < map.getWidth(); x++) {
@@ -151,6 +186,29 @@ public class Main extends Application {
         }
 
     }
+
+    public void refresh(GameMap map) {
+        context.setFill(Color.BLACK);
+        context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        for (int x = 0; x < map.getWidth(); x++) {
+            for (int y = 0; y < map.getHeight(); y++) {
+                Cell cell = map.getCell(x, y);
+                if (cell.getActor() != null) {
+                    Tiles.drawTile(context, cell.getActor(), x, y);
+                } else {
+                    Tiles.drawTile(context, cell, x, y);
+                }
+
+            }
+
+            healthLabel.setText(" " + map.getPlayer().getHealth());
+            DamageLabel.setText(" " + map.getPlayer().getDamage());
+            keyCount.setText(" " + map.getPlayer().getKeyCount());
+
+        }
+
+    }
+
 
     public void SkeletonsMove(){
 
