@@ -26,6 +26,10 @@ public class Main extends Application {
     private Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
+    private Canvas canvas2 = new Canvas(
+            51 * Tiles.TILE_WIDTH,
+            20 * Tiles.TILE_WIDTH
+    );
 
 
     private GraphicsContext context = canvas.getGraphicsContext2D();
@@ -34,6 +38,7 @@ public class Main extends Application {
     private Label keyCount = new Label();
     private Label inventory = new Label();
     private Button buttonPickup = new Button("Pick-up");
+    private MonsterMoveThread monsters;
     Timer timer = new Timer();
 
 
@@ -92,6 +97,7 @@ public class Main extends Application {
                                 cell.setType(CellType.FLOOR);
                                 refresh();
                             } else if (cell.getTileName().equals("next") && cell.getActor() != null){
+                                monsters.stop();
                                 map = MapLoader.loadMap("/map2.txt");
                                 context = canvas.getGraphicsContext2D();
                                 borderPane.setCenter(canvas);
@@ -151,6 +157,7 @@ public class Main extends Application {
                 break;
             case F:
                 MonsterMoveThread monsterMoveThread = new MonsterMoveThread(map, context, canvas);
+                monsters = monsterMoveThread;
                 monsterMoveThread.start();
                 System.out.println("Main method executed by main thread");
                 System.out.println("Number of active threads from the given thread: " + Thread.activeCount());
