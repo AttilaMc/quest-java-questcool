@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
@@ -13,6 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 
@@ -39,6 +43,10 @@ public class Main extends Application {
     private Label inventory = new Label();
     private Button buttonPickup = new Button("Pick-up");
     private MonsterMoveThread monsters;
+    private Popup popup = new Popup();
+    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Congratulations, you have reached LEVEL 2", ButtonType.OK);
+
+
     Timer timer = new Timer();
 
 
@@ -52,6 +60,13 @@ public class Main extends Application {
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
+        popup.setX(300);
+        popup.setY(200);
+        popup.getContent().addAll(new Circle(25, 25, 50, Color.AQUAMARINE));
+        popup.setHideOnEscape(true);
+        popup.centerOnScreen();
+
+
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(new Label("Damage: "), 0, 1);
@@ -97,6 +112,9 @@ public class Main extends Application {
                                 refresh();
                             } else if (cell.getTileName().equals("next") && cell.getActor() != null) {
                                 monsters.stop();
+                                //popup.show(primaryStage);
+                                alert.show();
+
                                 map = MapLoader.loadMap("/map2.txt");
                                 context = canvas.getGraphicsContext2D();
                                 borderPane.setCenter(canvas);
