@@ -12,7 +12,13 @@ public enum CellType {
     POLICE("police"),
     PUDINGMONSTER("pudingMonster"),
     MANBEARPIG("manBearPig"),
-    NEXT("next");
+    CLOSEDROOM("closedroom"),
+    GRASS("grass"),
+    CHEST("chest"),
+    OPENROOM("openroom"),
+    NEXT("next"),
+    CROWN("crown"),
+    TREE("tree");
 
 
 

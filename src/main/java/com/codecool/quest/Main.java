@@ -2,6 +2,7 @@ package com.codecool.quest;
 
 import com.codecool.quest.logic.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -18,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import java.util.concurrent.TimeUnit;
 
 
 import java.util.Timer;
@@ -42,9 +44,11 @@ public class Main extends Application {
     private Label keyCount = new Label();
     private Label inventory = new Label();
     private Button buttonPickup = new Button("Pick-up");
+    private Button nextLevel = new Button("GO To Next LEVEL!");
     private MonsterMoveThread monsters;
     private Popup popup = new Popup();
     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Congratulations, you have reached LEVEL 2", ButtonType.OK);
+    Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "CONGRATULATIONS, YOU HAVE WON!", ButtonType.OK);
 
 
     Timer timer = new Timer();
@@ -58,7 +62,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GridPane ui = new GridPane();
-        ui.setPrefWidth(200);
+        ui.setPrefWidth(250);
         ui.setPadding(new Insets(10));
         popup.setX(300);
         popup.setY(200);
@@ -70,14 +74,17 @@ public class Main extends Application {
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(new Label("Damage: "), 0, 1);
-        ui.add(new Label("Key Count"), 0, 2);
-        ui.add(new Label("Inventory"), 0, 3);
+        ui.add(new Label("Ordinary Keys: "), 0, 2);
+        ui.add(new Label("Magic Keys: "), 0, 3);
+        //ui.add(new Label("Inventory: "), 0, 4);
 
         ui.add(healthLabel, 1, 0);
         ui.add(DamageLabel, 1, 1);
         ui.add(keyCount, 2, 2);
+
         ui.add(inventory, 2, 3);
-        ui.add(buttonPickup, 3, 4);
+        ui.add(buttonPickup, 0, 5);
+        ui.add(nextLevel, 0,7);
 
         BorderPane borderPane = new BorderPane();
 
@@ -110,22 +117,45 @@ public class Main extends Application {
                                 cell.getActor().increaseHealth();
                                 cell.setType(CellType.FLOOR);
                                 refresh();
-                            } else if (cell.getTileName().equals("next") && cell.getActor() != null) {
-                                monsters.stop();
-                                //popup.show(primaryStage);
-                                alert.show();
+                            } else if(cell.getTileName().equals("chest") && cell.getActor() != null){
+                                cell.getActor().increaseChest();
+                                cell.setType(CellType.GRASS);
+                                refresh();
+                            } else if(cell.getTileName().equals("crown") && cell.getActor() != null){
+                                cell.setType(CellType.GRASS);
+                                alert2.show();
 
-                                map = MapLoader.loadMap("/map2.txt");
-                                context = canvas.getGraphicsContext2D();
-                                borderPane.setCenter(canvas);
 
-                                System.out.println("hsdf");
+                                Platform.exit();
+                                refresh();
                             }
                         }
                     }
 
 
                 });
+
+        nextLevel.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            for (int x = 0; x < map.getWidth(); x++) {
+                for (int y = 0; y < map.getHeight(); y++) {
+                    Cell cell = map.getCell(x, y);
+                    if (cell.getTileName().equals("sword") && cell.getActor() != null) {
+                        cell.getActor().increasePlayerDamageBySword();
+                        cell.setType(CellType.FLOOR);
+                    } else if (cell.getTileName().equals("next") && cell.getActor() != null) {
+                        monsters.stop();
+                        //popup.show(primaryStage);
+                        alert.show();
+
+                        map = MapLoader.loadMap("/map2.txt");
+                        context = canvas.getGraphicsContext2D();
+                        borderPane.setCenter(canvas);
+
+                        System.out.println("hsdf");
+                    }
+                }
+            }
+        });
 
         //Scene 2
         /*

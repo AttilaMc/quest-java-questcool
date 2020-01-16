@@ -60,7 +60,7 @@ public class MonsterMoveThread extends Thread{
                     for (int j = 0; j < mapp.getHeight(); j++) {
                         try {
                             String tileName = mapp.cells[i][j].getActor().getTileName();
-                            if (tileName.equals("skeleton")) {
+                            if (tileName.equals("skeleton") || tileName.equals("manBearPig") || tileName.equals("pudingMonster")) {
                                 int[] vector = mapp.cells[i][j].getActor().generateRandomVector();
                                 mapp.cells[i][j].getActor().move(vector[0], vector[1]);
 

@@ -6,6 +6,9 @@ import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.item.Heart;
 import com.codecool.quest.logic.item.Sword;
 import com.codecool.quest.logic.item.Key;
+import com.codecool.quest.logic.actors.ManBearPig;
+import com.codecool.quest.logic.actors.PudingMonster;
+import com.codecool.quest.logic.item.Chest;
 
 
 
@@ -72,12 +75,32 @@ public class MapLoader {
                             cell.setType(CellType.NEXT);
                             break;
                         case 'M':
-                            cell.setType(CellType.MANBEARPIG);
+                            cell.setType(CellType.FLOOR);
+                            new ManBearPig(cell);
                             break;
                         case 'F':
-                            cell.setType(CellType.PUDINGMONSTER);
+                            cell.setType(CellType.FLOOR);
+                            new PudingMonster(cell);
                             break;
-
+                        case 'f':
+                            cell.setType(CellType.CLOSEDROOM);
+                            break;
+                        case 'l':
+                            cell.setType(CellType.GRASS);
+                            break;
+                        case 'L':
+                            cell.setType(CellType.CROWN);
+                            break;
+                        case 'o':
+                            cell.setType(CellType.OPENROOM);
+                            break;
+                        case 'i':
+                            cell.setType(CellType.TREE);
+                            break;
+                        case 'I':
+                            cell.setType(CellType.CHEST);
+                            new Chest(cell);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

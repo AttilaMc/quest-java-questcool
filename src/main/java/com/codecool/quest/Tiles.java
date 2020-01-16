@@ -41,6 +41,12 @@ public class Tiles {
         tileMap.put("next", new Tile(4,13));
         tileMap.put("manBearPig", new Tile(30,8));
         tileMap.put("pudingMonster", new Tile(18,9));
+        tileMap.put("closedroom", new Tile(4, 11));
+        tileMap.put("grass", new Tile(7,1));
+        tileMap.put("chest", new Tile(5,15));
+        tileMap.put("openroom", new Tile(2, 9));
+        tileMap.put("tree", new Tile(4, 2));
+        tileMap.put("crown", new Tile(11, 24));
 
 
 

@@ -16,6 +16,8 @@ public abstract class Actor implements Drawable {
     private LinkedList<Item> inventory = new LinkedList<Item>();
     public int damage = 1;
     public int keyCount;
+    private String Type;
+    private int chest;
 
 
     public Actor(Cell cell) {
@@ -65,13 +67,20 @@ public abstract class Actor implements Drawable {
     public int preventOccupiedCell(Cell cell) {
 
         String cellType = cell.getType().toString();
-        if (cellType.equals("WALL") || cell.getActor() != null || cellType.equals("CLOSEDDOOR") || cellType.equals("police") || cellType.equals("next")) {
+        if (cellType.equals("WALL")
+                || cell.getActor() != null
+                || cellType.equals("CLOSEDDOOR")
+                || cellType.equals("CLOSEDROOM")) {
             if (cellType.equals("CLOSEDDOOR") && this.keyCount >= 1) {
                 cell.setType(CellType.OPENDOOR);
                 return 1;
             } else if(cellType.equals("next")){
 
-            } else {
+            } else if(cellType.equals("CLOSEDROOM") && this.keyCount >= 1) {
+                cell.setType(CellType.OPENROOM);
+                return 1;
+            }
+            else {
                 return 0;
             }
         }
@@ -96,8 +105,10 @@ public abstract class Actor implements Drawable {
 
     public void actorAttack(Cell cell, Cell nextCell) {
         int actorInActualCellDamage = cell.getActor().getDamage();
+
         nextCell.getActor().setHealth(-1 * actorInActualCellDamage);
         if (nextCell.getActor().health <= 0) {
+
             nextCell.setActor(null);
             nextCell.setType(CellType.FLOOR);
 
@@ -161,6 +172,17 @@ public abstract class Actor implements Drawable {
 
     public void increaseHealth() {
         this.health += 5;
+    }
+
+    public void increaseChest(){
+        this.chest += 1;
+    }
+    public String getType(){
+        return Type;
+    }
+
+    public void setType(String type){
+        this.Type = type;
     }
 }
 
