@@ -10,7 +10,10 @@ public enum CellType {
     CLOSEDDOOR("closeddoor"),
     HEALTH("health"),
     POLICE("police"),
+    PUDINGMONSTER("pudingMonster"),
+    MANBEARPIG("manBearPig"),
     NEXT("next");
+
 
 
 

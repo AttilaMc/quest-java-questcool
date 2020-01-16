@@ -39,8 +39,8 @@ public class Tiles {
         tileMap.put("police", new Tile(28, 4));
 
         tileMap.put("next", new Tile(4,13));
-        tileMap.put("manBearPig", new Tile(30,9));
-        tileMap.put("pudingMonster", new Tile(25,8));
+        tileMap.put("manBearPig", new Tile(30,8));
+        tileMap.put("pudingMonster", new Tile(18,9));
 
 
 
