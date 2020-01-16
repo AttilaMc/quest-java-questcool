@@ -67,7 +67,6 @@ public class Main extends Application {
         BorderPane borderPane = new BorderPane();
 
 
-
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);
 
@@ -96,7 +95,7 @@ public class Main extends Application {
                                 cell.getActor().increaseHealth();
                                 cell.setType(CellType.FLOOR);
                                 refresh();
-                            } else if (cell.getTileName().equals("next") && cell.getActor() != null){
+                            } else if (cell.getTileName().equals("next") && cell.getActor() != null) {
                                 monsters.stop();
                                 map = MapLoader.loadMap("/map2.txt");
                                 context = canvas.getGraphicsContext2D();
@@ -123,7 +122,6 @@ public class Main extends Application {
             }
         }
         */
-
 
 
         primaryStage.setTitle("Codecool Quest");
@@ -164,7 +162,6 @@ public class Main extends Application {
                 //timer.schedule(new IntervalCodeRun(map), 0, 1000);
                 refresh();
                 break;
-
 
 
         }
@@ -217,7 +214,7 @@ public class Main extends Application {
     }
 
 
-    public void SkeletonsMove(){
+    public void SkeletonsMove() {
 
         for (int i = 0; i < map.getWidth(); i++) {
             for (int j = 0; j < map.getHeight(); j++) {
