@@ -126,7 +126,6 @@ public class Main extends Application {
                                 alert2.show();
 
 
-                                Platform.exit();
                                 refresh();
                             }
                         }
